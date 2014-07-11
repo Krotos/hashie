@@ -1,3 +1,6 @@
-class Mash
+module Hashie
+  class Mash
 
+
+  end
 end
