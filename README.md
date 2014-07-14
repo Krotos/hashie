@@ -1,4 +1,4 @@
-[![Build Status](https://travis-ci.org/Krotos/hashie.svg?branch=master)](https://travis-ci.org/Krotos/hashie)[![Coverage Status](https://coveralls.io/repos/Krotos/hashie/badge.png)](https://coveralls.io/r/Krotos/hashie)
+[![Build Status](https://travis-ci.org/Krotos/hashie.svg?branch=master)](https://travis-ci.org/Krotos/hashie)[![Coverage Status](https://coveralls.io/repos/Krotos/hashie/badge.png)](https://coveralls.io/r/Krotos/hashie)[![Code Climate](https://codeclimate.com/github/Krotos/hashie.png)](https://codeclimate.com/github/Krotos/hashie)
 
 # Hashie
 
