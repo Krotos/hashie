@@ -17,5 +17,9 @@ module Hashie
     def key?(asked_key)
       @data.include?(asked_key.to_sym)
     end
+
+    def respond_to_missing?(name, *args)
+      @data[name] || @data[name[0..-2].to_sym]
+    end
   end
 end
