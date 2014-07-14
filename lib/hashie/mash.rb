@@ -1,18 +1,23 @@
 module Hashie
 
   class Mash
-    attr_accessor :data
 
     def initialize
-      @data = Hash.new
-    end
-    def method_missing(name, *args, &block)
-      return !data[name.to_s.delete('?').to_sym].nil? if name.to_s.end_with? '?'
-      if name.to_s.end_with? '='
-        return data[name.to_s.delete('=').to_sym] = args[0]
-      end
-      data[name]
+      @data = {}
     end
 
+    def method_missing(name, *args, &block)
+      case name[-1]
+        when '?' then !@data[name[0..-2].to_sym].nil?
+        when '_' then Mash.new
+        when '=' then @data[name[0..-2].to_sym] = args[0]
+        when '!' then @data[name[0..-2].to_sym] = Mash.new
+        else @data[name]
+      end
+    end
+
+    def key?(asked_key)
+      @data.include? (asked_key.to_sym)
+    end
   end
 end
