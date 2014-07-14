@@ -1,3 +1,5 @@
+[![Build Status](https://travis-ci.org/Krotos/hashie.svg?branch=master)](https://travis-ci.org/Krotos/hashie)[![Coverage Status](https://coveralls.io/repos/Krotos/hashie/badge.png)](https://coveralls.io/r/Krotos/hashie)
+
 # Hashie
 
 TODO: Write a gem description
