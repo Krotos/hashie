@@ -43,5 +43,4 @@ class MashTest < MiniTest::Unit::TestCase
   def test_under_bang
     assert !@mash.author_.name
   end
-
 end
