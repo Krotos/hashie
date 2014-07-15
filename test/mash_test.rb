@@ -43,4 +43,10 @@ class MashTest < MiniTest::Unit::TestCase
   def test_under_bang
     assert !@mash.author_.name
   end
+
+  def test_respond_to_missing
+    assert !@mash.respond_to?(:name)
+    @mash.name = "Name"
+    assert @mash.respond_to? :name
+  end
 end
