@@ -14,14 +14,14 @@ module Hashie
       self.class.local_data.each do |key, value|
         @data[key] = hash[key] || value[:default]
         assert_raise_argument_error(key, @data[key])
-
-        define_singleton_method(:"#{key}=") do |defined_value|
-          assert_raise_argument_error(key, defined_value)
-          @data[key] = defined_value || value[:default]
-        end
-
-        define_singleton_method(key) do
-          @data[key]
+        if key.is_a?(Symbol)
+          define_singleton_method("#{key}=".to_sym) do |defined_value|
+            assert_raise_argument_error(key, defined_value)
+            @data[key] = defined_value || value[:default]
+          end
+          define_singleton_method(key) do
+            @data[key]
+          end
         end
       end
     end
@@ -34,6 +34,7 @@ module Hashie
     def []=(key, value)
       assert_raise_argument_error(key, value)
       @data[key] = value || self.class.local_data[key][:default]
+
     end
 
     def has_default?(key)
@@ -43,6 +44,13 @@ module Hashie
     def assert_raise_argument_error(key, value)
       raise ArgumentError, "ArgumentError: The property '#{key}' is required for this Dash." \
         if value.nil? && self.class.local_data[key][:required] && !has_default?(key)
+    end
+
+    def update_attributes!(hash)
+      hash.each do |key, value|
+        assert_raise_argument_error(key, value)
+        @data[key] = value || self.class.local_data[key][:default]
+      end
     end
   end
 end
