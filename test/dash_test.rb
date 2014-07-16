@@ -9,8 +9,8 @@ class DashTest < MiniTest::Unit::TestCase
 
 
   def test_init_args_error
-    assert_raises(ArgumentError){dash = Person.new}
-    assert_raises(ArgumentError){dash = Person.new(email: 'mail@mail.com')}
+    assert_raises(ArgumentError) {Person.new}
+    assert_raises(ArgumentError) {Person.new(email: 'mail@mail.com')}
   end
 
   def test_init_args
@@ -30,6 +30,19 @@ class DashTest < MiniTest::Unit::TestCase
 
   def test_required_true
     dash = Person.new(name: 'Bob')
-    assert_raises(ArgumentError){dash.name = nil}
+    assert_raises(ArgumentError) {dash.name = nil}
   end
+
+  def test_square_parens
+    dash = Person.new(name: 'Bob')
+    assert_equal 'Bob', dash[:name]
+    assert_raises (NoMethodError) {dash[:key_that_not_exist]}
+  end
+
+  def test_square_parens_set_val
+    dash = Person.new(name: 'Bob')
+    dash[:name] = 'Sam'
+    assert_equal 'Sam', dash.name
+  end
+
 end
